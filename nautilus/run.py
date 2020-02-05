@@ -6,8 +6,6 @@ import argparse
 
 def command2name(command):
     args = command.split()[2:]
-    print(command)
-    print(args)
     return '-'.join([''.join([a.strip('-')[0]+''.join([aa for aa in a.strip('-')[1:] if aa.isupper() or aa in '0123456789'])
                               for a in arg.split('_')]) for arg in args])
 def commands2name(commands):
