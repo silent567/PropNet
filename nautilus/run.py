@@ -7,12 +7,12 @@ import argparse
 def command2name(command):
     args = command.split()[2:]
     return '-'.join([''.join([a.strip('-')[0]+''.join([aa for aa in a.strip('-')[1:] if aa.isupper() or aa in '0123456789'])
-                              for a in arg.split('_')]) for arg in args])
+                              for a in arg.split('_')]) for arg in args if '-' != arg[0]])
 def commands2name(commands):
     return 'ht-'+('test-' if 'test.py' in ''.join(commands) else '')+\
         ('.'.join([command2name(cmd) for cmd in commands]).lower())
 def commands2command(commands):
-    return 'cd /cephfs/haotang/PropNet && bash parallel.sh ' + (' '.join(["'%s'"%cmd for cmd in commands]))
+    return 'cd /cephfs/haotang/PropNet && apt-get update && apt-get -y install libgtk2.0-dev && pip install -r requirements.txt  && bash parallel.sh ' + (' '.join(["'%s'"%cmd for cmd in commands]))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
